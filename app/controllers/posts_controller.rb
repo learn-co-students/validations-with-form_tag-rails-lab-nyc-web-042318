@@ -8,11 +8,21 @@ class PostsController < ApplicationController
   end
 
   def update
+    # @temp_post = Post.new(post_params)
     @post = Post.find(params[:id])
-
     @post.update(post_params)
+    # binding.pry
 
-    redirect_to post_path(@post)
+
+    if(@post.valid?)
+      redirect_to post_path(@post)
+    else
+      # byebug
+      # binding.pry
+      # @post = Post.find(params[:id])
+
+      render :edit
+    end
   end
 
   private
